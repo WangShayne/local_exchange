@@ -138,5 +138,6 @@
   ],
   "vetur.format.scriptInitialIndent": true,
   "vetur.format.styleInitialIndent": true,
-  "vetur.validation.script": false
+  "vetur.validation.script": false,
+  "compile-hero.disable-compile-files-on-did-save-code": false
 }

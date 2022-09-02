@@ -1,12 +1,7 @@
 <template>
   <Dropdown placement="bottomLeft" :overlayClassName="`${prefixCls}-dropdown-overlay`">
     <span :class="[prefixCls, `${prefixCls}--${theme}`]" class="flex">
-      <img :class="`${prefixCls}__header`" :src="getUserInfo.avatar" />
-      <span :class="`${prefixCls}__info hidden md:block`">
-        <span :class="`${prefixCls}__name  `" class="truncate">
-          {{ getUserInfo.realName }}
-        </span>
-      </span>
+      <span :class="`${prefixCls}__info hidden md:block`"> </span>
     </span>
 
     <template #overlay>
@@ -39,7 +34,7 @@
   import { Dropdown, Menu } from 'ant-design-vue';
   import type { MenuInfo } from 'ant-design-vue/lib/menu/src/interface';
 
-  import { defineComponent, computed } from 'vue';
+  import { defineComponent } from 'vue';
 
   import { DOC_URL } from '/@/settings/siteSetting';
 
@@ -49,7 +44,6 @@
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useModal } from '/@/components/Modal';
 
-  import headerImg from '/@/assets/images/header.jpg';
   import { propTypes } from '/@/utils/propTypes';
   import { openWindow } from '/@/utils';
 
@@ -74,11 +68,6 @@
       const { t } = useI18n();
       const { getShowDoc, getUseLockPage } = useHeaderSetting();
       const userStore = useUserStore();
-
-      const getUserInfo = computed(() => {
-        const { realName = '', avatar, desc } = userStore.getUserInfo || {};
-        return { realName, avatar: avatar || headerImg, desc };
-      });
 
       const [register, { openModal }] = useModal();
 
@@ -113,7 +102,6 @@
       return {
         prefixCls,
         t,
-        getUserInfo,
         handleMenuClick,
         getShowDoc,
         register,
