@@ -21,7 +21,6 @@ export function createPermissionGuard(router: Router) {
   router.beforeEach(async (to, from, next) => {
     // const { fullPath, meta, path } = to;
     // const { ignoreAuth, permission } = meta;
-    console.log('permissionGuard.ts: to, from, next', to, from, next);
     // if (
     //   from.path === ROOT_PATH &&
     //   to.path === PageEnum.BASE_HOME &&

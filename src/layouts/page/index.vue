@@ -38,11 +38,14 @@
   import { getTransitionName } from './transition';
 
   import { useMultipleTabStore } from '/@/store/modules/multipleTab';
+  import { useAccountsStore } from '/@/store/modules/accounts';
 
   export default defineComponent({
     name: 'PageLayout',
     components: { FrameLayout },
     setup() {
+      const accountsStore = useAccountsStore();
+      accountsStore.loadAll();
       const { getShowMultipleTab } = useMultipleTabSetting();
       const tabStore = useMultipleTabStore();
 

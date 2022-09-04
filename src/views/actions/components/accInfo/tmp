@@ -1,0 +1,87 @@
+<!-- <template>
+  <Card title="交易账户" :bordered="false" class="!mb-4">
+    <a-form>
+      <a-form-item>
+        <a-select
+          v-model:value="value"
+          show-search
+          label-in-value
+          placeholder="下拉或根据别名搜索账户"
+          style="width: 200px"
+          :options="options"
+          @focus="handleFocus"
+          @blur="handleBlur"
+          @change="handleChange"
+          @search="fetchAccounts"
+        >
+          <template v-if="fetching" #notFoundContent>
+            <a-spin size="small" />
+          </template>
+        </a-select>
+      </a-form-item>
+    </a-form>
+  </Card>
+</template>
+
+<script setup lang="ts">
+  import { computed, ref, watch } from 'vue';
+  import { Card } from 'ant-design-vue';
+  import { debounce } from 'lodash-es';
+  import { useAccountsStore } from '/@/store/modules/accounts';
+  import { getAccoutByName } from '/@/api/account/account';
+
+  const store = useAccountsStore();
+  // const allAccounts = computed(() => store.allAccounts);
+  const ativeAccount = computed(() => store.getActiveAccount);
+  const fetching = ref(false);
+  const value = ref<String | undefined>('');
+  value.value = ativeAccount.value;
+
+  const options = ref([
+    // { value: 'jack', label: 'Jack' },
+    // { value: 'lucy', label: 'Lucy' },
+    // { value: 'tom', label: 'Tom' },
+  ]);
+
+  watch(
+    value,
+    () => {
+      options.value = [];
+    },
+    { immediate: true },
+  );
+  const handleChange = (value: string) => {
+    console.log(`selected ${value}`);
+    store.setActiveAccount(value);
+  };
+  const handleBlur = () => {
+    console.log(ativeAccount);
+    console.log(value.value);
+  };
+  const handleFocus = () => {
+    console.log('focus');
+  };
+  // const filterOption = (input: string, option: any) => {
+  //   return option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0;
+  // };
+  // let lastFetchId = 0;
+  const fetchAccounts = debounce((value) => {
+    console.log('fetching user', value);
+    if (!value) {
+      store.loadAll();
+      return;
+    }
+    options.value = [];
+    fetching.value = true;
+    getAccoutByName({ name: value }).then((res) => {
+      const data = res.map((item: any) => {
+        console.log(item);
+        return { value: item.trader_id, label: item.name } as never;
+      });
+      console.log('data:', data);
+      options.value = data;
+      console.log(options.value);
+      fetching.value = false;
+    });
+  }, 300);
+</script> -->

@@ -39,6 +39,15 @@
   const { createMessage } = useMessage();
   const { success } = createMessage;
 
+  const randomLetter = (len: number) => {
+    let x = '0123456789qwertyuioplkjhgfdsazxcvbnm';
+    let tmp = '';
+    for (let i = 0; i < len; i++) {
+      tmp += x.charAt(Math.ceil(Math.random() * 100000000) % x.length);
+    }
+    return tmp;
+  };
+
   // 表单
   const formState = reactive({
     id: '',
@@ -50,9 +59,9 @@
   // model模型
   const [register, { setModalProps, closeModal }] = useModalInner(async (data: any) => {
     formState.id = '';
-    formState.name = '';
-    formState.apiKey = '';
-    formState.secretKey = '';
+    formState.name = randomLetter(6);
+    formState.apiKey = randomLetter(64);
+    formState.secretKey = randomLetter(64);
     loading.value = true;
     const { updateMode } = data;
     if (updateMode) {
