@@ -12,26 +12,26 @@ export function getBasicColumns(): BasicColumn[] {
     },
     {
       title: '合约余额',
-      dataIndex: 'contractBalance',
+      dataIndex: 'balance',
     },
     {
       title: '合约可用',
-      dataIndex: 'contractAvailable',
+      dataIndex: 'available',
     },
   ];
 }
 
-export function getBasicData() {
-  return (() => {
-    const arr: any = [];
-    for (let index = 0; index < 1; index++) {
-      arr.push({
-        spotBalance: Math.random() * 1000,
-        spotAvailable: Math.random() * 1000,
-        contractBalance: Math.random() * 1000,
-        contractAvailable: Math.random() * 1000,
-      });
-    }
-    return arr;
-  })();
-}
+// export function getBasicData() {
+//   return (() => {
+//     const arr: any = [];
+//     for (let index = 0; index < 1; index++) {
+//       arr.push({
+//         spotBalance: Math.random() * 1000,
+//         spotAvailable: Math.random() * 1000,
+//         contractBalance: Math.random() * 1000,
+//         contractAvailable: Math.random() * 1000,
+//       });
+//     }
+//     return arr;
+//   })();
+// }

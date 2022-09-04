@@ -5,7 +5,7 @@
         <a-select
           v-model:value="value"
           show-search
-          placeholder="下拉选择BTC/USDT或ETH/USDT或手动输入交易对"
+          placeholder="下拉选择BTCUSDT或ETHUSDT或手动输入交易对"
           style="width: 400px"
           :options="options"
           @focus="handleFocus"
@@ -31,7 +31,7 @@
   import C2CBlance from './C2CBlance.vue';
 
   const fetching = ref(false);
-  const value = ref<String | undefined>(undefined);
+  const value = ref<String | undefined>('ETHUSDT');
   const options = ref<SelectProps['options']>([
     // { value: 'BTC/USDT', label: 'BTC/USDT' },
     // { value: 'ETH/USDT', label: 'ETH/USDT' },

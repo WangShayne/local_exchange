@@ -3,6 +3,19 @@ export interface DualSideParams {
   dualSide?: boolean;
 }
 
+export interface ConfigParams {
+  id?: string;
+  symbol?: string;
+  leverage?: number;
+  marginType?: string;
+}
+
+export interface ConfigResultModel {
+  id?: string;
+  leverage?: number;
+  marginType?: string;
+}
+
 // export interface DualSideResultModel {
 //   id?: string;
 //   tarder_id?: string;

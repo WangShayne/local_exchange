@@ -32,7 +32,7 @@ export interface StatesResultModel {
   apiKeys?: string;
   balance?: number;
   available?: number;
-  spotBlance?: number;
+  spotBalance?: number;
   spotAvailable?: number;
   failList?: any[];
   timestamp?: number;

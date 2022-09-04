@@ -39,7 +39,7 @@
 </script>
 <style lang="less" scoped>
   .scroll-wrap {
-    width: 50%;
+    width: 80%;
     height: 300px;
     background-color: @component-background;
   }
