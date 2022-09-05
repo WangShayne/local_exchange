@@ -1,5 +1,5 @@
 import { defHttp } from '/@/utils/http/axios';
-import { OrderParams } from './model/orderModel';
+import { OrderParams, QuantityParams, QuantityResultModel } from './model/orderModel';
 import { ErrorMessageMode } from '/#/axios';
 
 enum Api {
@@ -23,7 +23,17 @@ const symbolToUpCase = (symbol: string) => {
 export function postOrder(params: OrderParams, mode: ErrorMessageMode = 'modal') {
   return defHttp.post(
     {
-      url: Api.account + `/${params.id}/symbol/${symbolToUpCase(params.symbol as string)}/config`,
+      url: Api.account + `/${params.id}/symbol/${symbolToUpCase(params.symbol as string)}/order`,
+      params,
+    },
+    { errorMessageMode: mode },
+  );
+}
+
+export function getQuantity(params: QuantityParams, mode: ErrorMessageMode = 'modal') {
+  return defHttp.post<QuantityResultModel[]>(
+    {
+      url: Api.account + `/${params.id}/symbol/${symbolToUpCase(params.symbol as string)}/quantity`,
       params,
     },
     { errorMessageMode: mode },

@@ -34,7 +34,7 @@
   // import { BasicForm, FormSchema } from '/@/components/Form';
   // import { useMessage } from '/@/hooks/web/useMessage';
   // import type { UnwrapRef } from 'vue';
-  import { reactive, onMounted } from 'vue';
+  import { reactive, onMounted, watch } from 'vue';
   import { Card } from 'ant-design-vue';
   import { getChangeConfig, setChangeConfig } from '/@/api/change/change';
   import { useAccountsStore } from '/@/store/modules/accounts';
@@ -77,20 +77,37 @@
       });
   };
 
-  const getNowConfig = async () => {
-    const res = await getChangeConfig({
+  const getNowConfig = () => {
+    // const res = await getChangeConfig();
+
+    getChangeConfig({
       id: accStore.id,
       symbol: formState.symbol,
-    });
-
-    formState.marginType = res.marginType;
-    formState.leverage = res.leverage;
-    changeStore.setChangeConfig({
-      symbol: formState.symbol,
-      marginType: res.marginType,
-      leverage: res.leverage,
-    });
+    })
+      .then((res) => {
+        formState.marginType = res.marginType;
+        formState.leverage = res.leverage;
+        changeStore.setChangeConfig({
+          symbol: formState.symbol,
+          marginType: res.marginType,
+          leverage: res.leverage,
+        });
+      })
+      .catch((_) => {
+        changeStore.setChangeConfig({
+          symbol: formState.symbol,
+          marginType: 'ISOLATED',
+          leverage: 1,
+        });
+      });
   };
+
+  watch(
+    () => accStore.id,
+    () => {
+      getNowConfig();
+    },
+  );
 
   onMounted(() => {
     getNowConfig();
