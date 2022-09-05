@@ -21,7 +21,7 @@
   </Card>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, watch } from 'vue';
+  import { ref, watch } from 'vue';
   import { Card } from 'ant-design-vue';
 
   // table
@@ -34,8 +34,7 @@
 
   // store
   import { useAccountsStore } from '/@/store/modules/accounts';
-  const store = useAccountsStore();
-  const accState = computed(() => store.state);
+  const accStore = useAccountsStore();
 
   const canResize = ref(false);
   const loading = ref(false);
@@ -50,7 +49,7 @@
   };
 
   watch(
-    () => accState.value,
+    () => accStore.state,
     (val) => {
       const { balance, available, spotBalance, spotAvailable } = val;
       data.value = [{ balance, available, spotBalance, spotAvailable } as never];

@@ -79,31 +79,33 @@
 
   const getNowConfig = () => {
     // const res = await getChangeConfig();
-
-    getChangeConfig({
-      id: accStore.id,
-      symbol: formState.symbol,
-    })
-      .then((res) => {
-        formState.marginType = res.marginType;
-        formState.leverage = res.leverage;
-        changeStore.setChangeConfig({
-          symbol: formState.symbol,
-          marginType: res.marginType,
-          leverage: res.leverage,
-        });
+    if (accStore.id) {
+      console.log(formState.symbol);
+      getChangeConfig({
+        id: accStore.id,
+        symbol: formState.symbol,
       })
-      .catch((_) => {
-        changeStore.setChangeConfig({
-          symbol: formState.symbol,
-          marginType: 'ISOLATED',
-          leverage: 1,
+        .then((res) => {
+          formState.marginType = res.marginType;
+          formState.leverage = res.leverage;
+          changeStore.setChangeConfig({
+            symbol: formState.symbol,
+            marginType: res.marginType,
+            leverage: res.leverage,
+          });
+        })
+        .catch((_) => {
+          changeStore.setChangeConfig({
+            symbol: formState.symbol,
+            marginType: 'ISOLATED',
+            leverage: 1,
+          });
         });
-      });
+    }
   };
 
   watch(
-    () => accStore.id,
+    () => accStore.state,
     () => {
       getNowConfig();
     },

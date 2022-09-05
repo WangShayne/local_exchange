@@ -104,7 +104,7 @@
     transferFund({
       id: accState.value.id,
       transferType: Number(fromWallet.value),
-      percent: amount.value,
+      percent: Number(amount.value),
     })
       .then(() => {
         createMessage.success('划转成功');
@@ -119,7 +119,7 @@
       fromWallet.value = '1';
       toWallet.value = '0';
       amount.value = 0;
-      available.value = accState.value.available as number;
+      available.value = accState.value.spotAvailable as number;
     }
   };
 </script>

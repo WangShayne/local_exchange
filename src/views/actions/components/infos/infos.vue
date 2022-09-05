@@ -2,10 +2,10 @@
   <Card>
     <a-row>
       <a-col :span="12">
-        <Orders />
+        <Positions />
       </a-col>
       <a-col :span="12">
-        <Positions />
+        <Orders />
       </a-col>
     </a-row>
   </Card>

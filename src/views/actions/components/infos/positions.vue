@@ -26,16 +26,17 @@
   </BasicTable>
 </template>
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { ref, watch } from 'vue';
 
   // table
   import { BasicTable, TableAction } from '/@/components/Table';
   import { getBasicColumns, getBasicData } from './positionsData';
+  import { useAccountsStore } from '/@/store/modules/accounts';
+  const accStore = useAccountsStore();
   const actionColumn = {
     width: 150,
     title: 'Action',
     dataIndex: 'action',
-    slots: { customRender: 'action' },
   };
   const canResize = ref(false);
   const loading = ref(false);
@@ -47,4 +48,12 @@
   function handleClick(record: Recordable) {
     console.log('点击了删除', record);
   }
+
+  watch(
+    () => accStore.state,
+    (val) => {
+      const { positionList } = val;
+      data.value = positionList;
+    },
+  );
 </script>
