@@ -46,7 +46,7 @@
   const changeStore = useChangeStore();
 
   const formState = reactive({
-    symbol: 'ETH/USDT',
+    symbol: 'ETHUSDT',
     marginType: 'ISOLATED',
     leverage: 1,
   });

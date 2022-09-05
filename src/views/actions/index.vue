@@ -20,7 +20,7 @@
   import Blance from './components/blance/blance.vue';
   // import C2C from './components/C2C/C2C.vue';
   import ChangeConfig from './components/changeConfig/changeConfig.vue';
-  import Order from './components/order.vue';
+  import Order from './components/order/index.vue';
   import Infos from './components/infos/infos.vue';
   const store = useAccountsStore();
   const id = computed(() => store.id);
