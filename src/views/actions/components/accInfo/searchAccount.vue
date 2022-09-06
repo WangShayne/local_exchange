@@ -1,10 +1,5 @@
 <template>
-  <BasicForm
-    autoFocusFirstItem
-    :showActionButtonGroup="false"
-    :schemas="schemas"
-    :actionColOptions="{ span: 24 }"
-  >
+  <BasicForm :showActionButtonGroup="false" :schemas="schemas" :actionColOptions="{ span: 24 }">
     <template #remoteSearch="{ model, field }">
       <ApiSelect
         :api="getAccoutByNameOpt"
