@@ -80,7 +80,6 @@
   const getNowConfig = () => {
     // const res = await getChangeConfig();
     if (accStore.id) {
-      console.log(formState.symbol);
       getChangeConfig({
         id: accStore.id,
         symbol: formState.symbol,

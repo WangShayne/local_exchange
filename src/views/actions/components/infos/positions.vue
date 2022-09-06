@@ -26,12 +26,13 @@
   </BasicTable>
 </template>
 <script lang="ts" setup>
-  import { ref, watch } from 'vue';
+  import { ref, watch, toRaw } from 'vue';
 
   // table
   import { BasicTable, TableAction } from '/@/components/Table';
-  import { getBasicColumns, getBasicData } from './positionsData';
+  import { getBasicColumns } from './positionsData';
   import { useAccountsStore } from '/@/store/modules/accounts';
+  import { closePosition } from '/@/api/order/order';
   const accStore = useAccountsStore();
   const actionColumn = {
     width: 150,
@@ -43,17 +44,31 @@
   const striped = ref(true);
   const border = ref(true);
   const columns = getBasicColumns();
-  const data = getBasicData();
+  const data = ref([]);
 
   function handleClick(record: Recordable) {
-    console.log('点击了删除', record);
+    console.log('点击了平仓', record);
+    closePosition({
+      id: accStore.id,
+      symbol: record.symbol,
+      quantity: record.quantity,
+    })
+      .then((res) => {
+        console.log('平仓成功', res);
+      })
+      .catch((err) => {
+        console.log('平仓失败', err);
+      });
   }
 
   watch(
     () => accStore.state,
     (val) => {
-      const { positionList } = val;
-      data.value = positionList;
+      data.value = [];
+      const { positionList } = toRaw(val);
+
+      console.log(positionList);
+      data.value = positionList as never[];
     },
   );
 </script>

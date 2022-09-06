@@ -39,3 +39,27 @@ export function getQuantity(params: QuantityParams, mode: ErrorMessageMode = 'mo
     { errorMessageMode: mode },
   );
 }
+
+// 取消订单
+export function cancelOrder(params: OrderParams, mode: ErrorMessageMode = 'modal') {
+  return defHttp.delete(
+    {
+      url:
+        Api.account +
+        `/${params.id}/symbol/${symbolToUpCase(params.symbol as string)}/order/${params.orderId}`,
+      params,
+    },
+    { errorMessageMode: mode },
+  );
+}
+
+// 平仓
+export function closePosition(params: OrderParams, mode: ErrorMessageMode = 'modal') {
+  return defHttp.post(
+    {
+      url: Api.account + `/${params.id}/symbol/${symbolToUpCase(params.symbol as string)}/position`,
+      params,
+    },
+    { errorMessageMode: mode },
+  );
+}

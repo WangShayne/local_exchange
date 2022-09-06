@@ -36,6 +36,12 @@
   import AccountsModel from './components/accountsModel.vue';
 
   import { delAccount } from '/@/api/account/account';
+  import { useAccountsStore } from '/@/store/modules/accounts';
+
+  import { useRouter } from 'vue-router';
+  const router = useRouter();
+
+  const accStore = useAccountsStore();
 
   const { createMessage } = useMessage();
 
@@ -76,7 +82,9 @@
   });
 
   const routeTo = (record: any) => {
-    console.log(record);
+    accStore.setActiveAccountId(record.id);
+
+    router.push({ path: '/actions/index' });
   };
 
   const delACC = async () => {

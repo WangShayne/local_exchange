@@ -3,12 +3,21 @@ import { BasicColumn } from '/@/components/Table/src/types/table';
 export function getBasicColumns(): BasicColumn[] {
   return [
     {
+      title: 'ID',
+      dataIndex: 'orderId',
+      defaultHidden: true,
+    },
+    {
       title: '类型',
-      dataIndex: 'type',
+      dataIndex: 'orderType',
+    },
+    {
+      title: '交易对',
+      dataIndex: 'symbol',
     },
     {
       title: '方向',
-      dataIndex: 'direction',
+      dataIndex: 'tradeSide',
     },
     {
       title: '价格',
@@ -16,7 +25,15 @@ export function getBasicColumns(): BasicColumn[] {
     },
     {
       title: '数量',
-      dataIndex: 'amount',
+      dataIndex: 'quantity',
+    },
+    {
+      title: '只减仓',
+      dataIndex: 'reduceOnly',
+    },
+    {
+      title: '全部平仓',
+      dataIndex: 'closePosition',
     },
   ];
 }

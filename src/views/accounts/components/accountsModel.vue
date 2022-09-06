@@ -70,7 +70,6 @@
       } = data;
 
       const account = await getAccoutById(id);
-      console.log(account);
       updateACC.value = true;
       formState.id = id;
       formState.name = name;

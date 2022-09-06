@@ -8,6 +8,7 @@ export interface OrderParams {
   quantity?: number;
   price?: number;
   isOpen?: boolean;
+  orderId?: string;
 }
 
 export interface QuantityParams extends BasicParams {

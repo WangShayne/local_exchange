@@ -24,7 +24,6 @@ const symbolToUpCase = (symbol: string) => {
 
 // 获取交易设置
 export function getChangeConfig(params: getConfigParams, mode: ErrorMessageMode = 'modal') {
-  console.log(params);
   return defHttp.get(
     { url: Api.account + `/${params.id}/symbol/${symbolToUpCase(params.symbol as string)}/config` },
     { errorMessageMode: mode },

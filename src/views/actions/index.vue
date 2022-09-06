@@ -18,7 +18,6 @@
 
   import AccInfo from './components/accInfo/index.vue';
   import Blance from './components/blance/blance.vue';
-  // import C2C from './components/C2C/C2C.vue';
   import ChangeConfig from './components/changeConfig/changeConfig.vue';
   import Order from './components/order/index.vue';
   import Infos from './components/infos/infos.vue';
@@ -30,7 +29,7 @@
       if (id.value) {
         store.getAccountState(id.value);
       }
-    }, 5000);
+    }, 3000);
     console.log(isActive);
   });
 </script>

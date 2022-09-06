@@ -1,13 +1,7 @@
 <template>
   <Card>
-    <a-row>
-      <a-col :span="12">
-        <Positions />
-      </a-col>
-      <a-col :span="12">
-        <Orders />
-      </a-col>
-    </a-row>
+    <Positions />
+    <Orders />
   </Card>
 </template>
 

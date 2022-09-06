@@ -20,7 +20,6 @@
           <a-form-item label="百分比">
             <a-slider
               v-model:value="formMarket.percent"
-              :tooltip-visible="true"
               :marks="marks"
               @after-change="sliderMarketOpen"
             />
@@ -56,7 +55,6 @@
           <a-form-item label="数量百分比">
             <a-slider
               v-model:value="formLimit.percent"
-              :tooltip-visible="true"
               :marks="marks"
               @after-change="sliderLimitOpen"
             />
@@ -159,10 +157,8 @@
 
   // 市价开仓选择百分比
   const sliderMarketOpen = async (value: number) => {
-    console.log(value);
     // 获取市价开仓数量
     getQuantity({ id: unref(id), symbol: unref(symbol), percent: value }).then((res) => {
-      console.log(res);
       quantityStore.setMarketOpenList(res);
       res.forEach((item: QuantityResultModel) => {
         if (
