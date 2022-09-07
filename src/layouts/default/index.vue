@@ -26,7 +26,6 @@
   import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting';
   import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
   import { useDesign } from '/@/hooks/web/useDesign';
-  import { useLockPage } from '/@/hooks/web/useLockPage';
 
   import { useAppInject } from '/@/hooks/web/useAppInject';
 
@@ -48,7 +47,6 @@
       const { getShowSidebar, getIsMixSidebar, getShowMenu } = useMenuSetting();
 
       // Create a lock screen monitor
-      const lockEvents = useLockPage();
 
       const layoutClass = computed(() => {
         let cls: string[] = ['ant-layout'];
@@ -65,7 +63,6 @@
         getIsMobile,
         getIsMixSidebar,
         layoutClass,
-        lockEvents,
       };
     },
   });

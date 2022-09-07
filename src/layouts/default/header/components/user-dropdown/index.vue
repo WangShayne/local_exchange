@@ -14,12 +14,6 @@
         />
         <MenuDivider v-if="getShowDoc" />
         <MenuItem
-          v-if="getUseLockPage"
-          key="lock"
-          :text="t('layout.header.tooltipLock')"
-          icon="ion:lock-closed-outline"
-        />
-        <MenuItem
           key="logout"
           :text="t('layout.header.dropdownItemLoginOut')"
           icon="ion:power-outline"
@@ -66,7 +60,7 @@
     setup() {
       const { prefixCls } = useDesign('header-user-dropdown');
       const { t } = useI18n();
-      const { getShowDoc, getUseLockPage } = useHeaderSetting();
+      const { getShowDoc } = useHeaderSetting();
       const userStore = useUserStore();
 
       const [register, { openModal }] = useModal();
@@ -105,7 +99,6 @@
         handleMenuClick,
         getShowDoc,
         register,
-        getUseLockPage,
       };
     },
   });
