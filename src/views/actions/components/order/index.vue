@@ -1,5 +1,5 @@
 <template>
-  <a-card>
+  <Card>
     <template #title>
       <div class="flex justify-start align-center">
         <div class="mr-8">
@@ -15,7 +15,7 @@
     </template>
     <div class="grid grid-cols-5">
       <!-- 市价开仓 -->
-      <a-card>
+      <Card>
         <a-form layout="vertical" :model="formMarket">
           <a-form-item label="百分比">
             <a-slider
@@ -38,9 +38,9 @@
             <a-button type="primary" @click="handleMarketOpen">市价开仓</a-button>
           </a-form-item>
         </a-form>
-      </a-card>
+      </Card>
       <!-- 限价开仓 -->
-      <a-card>
+      <Card>
         <a-form layout="vertical" :model="formLimit">
           <a-form-item label="最大数量">
             <a-input
@@ -66,9 +66,9 @@
             <a-button type="primary" @click="handleLimitOpen">限价开仓</a-button>
           </a-form-item>
         </a-form>
-      </a-card>
+      </Card>
       <!-- 市价平仓 -->
-      <a-card>
+      <Card>
         <a-form :model="formMarketClose">
           <a-form-item label="数量">
             <a-input v-model:value="formMarketClose.quantity" placeholder="input placeholder" />
@@ -77,9 +77,9 @@
             <a-button type="primary" @click="handleMarketClose">市价平仓</a-button>
           </a-form-item>
         </a-form>
-      </a-card>
+      </Card>
       <!-- 限价平仓 -->
-      <a-card>
+      <Card>
         <a-form :model="formLimitClose">
           <a-form-item label="价格">
             <a-input v-model:value="formLimitClose.price" />
@@ -91,9 +91,9 @@
             <a-button type="primary" @click="handleLimitClose">限价平仓</a-button>
           </a-form-item>
         </a-form>
-      </a-card>
+      </Card>
       <!-- 止损单 -->
-      <a-card>
+      <Card>
         <a-form :model="formStopMarket">
           <a-form-item label="价格">
             <a-input v-model:value="formStopMarket.price" />
@@ -102,12 +102,13 @@
             <a-button type="primary" @click="handleFormStopMarket">止损下单</a-button>
           </a-form-item>
         </a-form>
-      </a-card>
+      </Card>
     </div>
-  </a-card>
+  </Card>
 </template>
 
 <script setup lang="ts">
+  import { Card } from 'ant-design-vue';
   import { computed, reactive, ref, unref, watch } from 'vue';
   import { getQuantity, postOrder } from '/@/api/order/order'; //postOrder
   import { useAccountsStore } from '/@/store/modules/accounts';

@@ -5,7 +5,6 @@ import { ACTIVE_ACCOUNTS_KEY } from '/@/enums/cacheEnum';
 import { AccountResultModel } from '/@/api/account/model/accountModel';
 import { StatesResultModel } from '/@/api/states/model/statesModel';
 import { getAccounts } from '/@/api/account/account';
-import { getState } from '/@/api/states/states';
 
 export interface AccountsState {
   id: string;
@@ -30,10 +29,8 @@ export const useAccountsStore = defineStore({
       console.log(aac);
       this.id = aac;
       Persistent.setLocal(ACTIVE_ACCOUNTS_KEY, aac);
-      this.getAccountState(aac);
     },
-    async getAccountState(id: string) {
-      const data = await getState({ id });
+    async setAccountState(data: any) {
       this.state = data;
     },
     loadAll() {

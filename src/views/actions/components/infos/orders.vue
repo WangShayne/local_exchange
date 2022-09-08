@@ -91,8 +91,6 @@
     (val) => {
       data.value = [];
       const { orderList } = toRaw(val);
-
-      console.log(orderList);
       data.value = orderList as never[];
     },
   );

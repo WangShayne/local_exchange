@@ -1,0 +1,1 @@
+function n(){return[{title:"\u4EA4\u6613\u5BF9",dataIndex:"symbol"},{title:"\u6570\u91CF",dataIndex:"quantity"},{title:"\u4EF7\u683C",dataIndex:"price"}]}function e(){return(()=>{const t=[];for(let a=0;a<100;a++)t.push({symbol:Math.random()*1>.5?"BTC/USDT":"ETH/USDT",quantity:Math.random()*1e3,price:Math.random()*1e3});return t})()}export{n as getBasicColumns,e as getBasicData};

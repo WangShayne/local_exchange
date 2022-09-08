@@ -66,8 +66,6 @@
     (val) => {
       data.value = [];
       const { positionList } = toRaw(val);
-
-      console.log(positionList);
       data.value = positionList as never[];
     },
   );
