@@ -1,15 +1,15 @@
 <template>
   <Card>
     <template #title>
-      <div class="flex justify-start align-center">
-        <div class="mr-8">
-          <a-radio-group v-model:value="mode" button-style="solid">
+      <div class="flex flex-col justify-center align-center">
+        <div class="text-center text-lg">
+          <a-statistic title="当前价格" :value="price" />
+        </div>
+        <div class="mt-4 flex justify-center aling-center">
+          <a-radio-group v-model:value="mode" button-style="solid" size="large">
             <a-radio-button value="Long">做多</a-radio-button>
             <a-radio-button value="Short">做空</a-radio-button>
           </a-radio-group>
-        </div>
-        <div>
-          <span>当前价格:{{ price }}</span>
         </div>
       </div>
     </template>
@@ -21,85 +21,98 @@
             <a-slider
               v-model:value="formMarket.percent"
               :marks="marks"
-              @after-change="sliderMarketOpen"
+              @change="sliderMarketOpen"
             />
           </a-form-item>
           <a-form-item label="最大数量">
-            <a-input
-              v-model:value="formMarket.MaxQuantity"
-              placeholder="input placeholder"
-              disabled
-            />
+            <a-input v-model:value="formMarket.MaxQuantity" disabled />
           </a-form-item>
           <a-form-item label="数量">
-            <a-input v-model:value="formMarket.quantity" placeholder="input placeholder" />
+            <a-input v-model:value="formMarket.quantity" placeholder="请输入数量" />
           </a-form-item>
           <a-form-item>
-            <a-button type="primary" @click="handleMarketOpen">市价开仓</a-button>
+            <a-popconfirm @confirm="handleMarketOpen">
+              <template #title>
+                <p> 确定<span class="text-red-900">市价开仓</span>吗? </p>
+              </template>
+              <a-button type="primary">市价开仓</a-button>
+            </a-popconfirm>
           </a-form-item>
         </a-form>
       </Card>
       <!-- 限价开仓 -->
       <Card>
         <a-form layout="vertical" :model="formLimit">
+          <a-form-item label="百分比">
+            <a-slider v-model:value="formLimit.percent" :marks="marks" @change="sliderLimitOpen" />
+          </a-form-item>
           <a-form-item label="最大数量">
-            <a-input
-              v-model:value="formLimit.MaxQuantity"
-              placeholder="input placeholder"
-              disabled
-            />
+            <a-input v-model:value="formLimit.MaxQuantity" disabled />
           </a-form-item>
           <a-form-item label="价格">
             <a-input v-model:value="formLimit.price" />
           </a-form-item>
-          <a-form-item label="数量百分比">
-            <a-slider
-              v-model:value="formLimit.percent"
-              :marks="marks"
-              @after-change="sliderLimitOpen"
-            />
-          </a-form-item>
           <a-form-item label="数量">
-            <a-input v-model:value="formLimit.quantity" placeholder="input placeholder" />
+            <a-input v-model:value="formLimit.quantity" placeholder="请输入数量" />
           </a-form-item>
           <a-form-item>
-            <a-button type="primary" @click="handleLimitOpen">限价开仓</a-button>
+            <a-popconfirm @confirm="handleLimitOpen">
+              <template #title>
+                <p> 确定<span class="text-red-900">限价开仓</span>吗? </p>
+              </template>
+              <a-button type="primary">限价开仓</a-button>
+            </a-popconfirm>
           </a-form-item>
         </a-form>
       </Card>
       <!-- 市价平仓 -->
       <Card>
-        <a-form :model="formMarketClose">
+        <a-form layout="vertical" :model="formMarketClose">
           <a-form-item label="数量">
-            <a-input v-model:value="formMarketClose.quantity" placeholder="input placeholder" />
+            <a-input v-model:value="formMarketClose.quantity" placeholder="请输入数量" />
           </a-form-item>
           <a-form-item>
-            <a-button type="primary" @click="handleMarketClose">市价平仓</a-button>
+            <a-popconfirm @confirm="handleMarketClose">
+              <template #title>
+                <p> 确定<span class="text-red-900">市价平仓</span>吗? </p>
+              </template>
+              <a-button type="primary">市价平仓</a-button>
+            </a-popconfirm>
           </a-form-item>
         </a-form>
       </Card>
       <!-- 限价平仓 -->
       <Card>
-        <a-form :model="formLimitClose">
+        <a-form layout="vertical" :model="formLimitClose">
           <a-form-item label="价格">
             <a-input v-model:value="formLimitClose.price" />
           </a-form-item>
           <a-form-item label="数量">
-            <a-input v-model:value="formLimitClose.quantity" placeholder="input placeholder" />
+            <a-input v-model:value="formLimitClose.quantity" placeholder="请输入数量" />
           </a-form-item>
           <a-form-item>
-            <a-button type="primary" @click="handleLimitClose">限价平仓</a-button>
+            <a-popconfirm @confirm="handleLimitClose">
+              <template #title>
+                <p> 确定<span class="text-red-900">限价平仓</span>吗? </p>
+              </template>
+              <a-button type="primary">限价平仓</a-button>
+            </a-popconfirm>
           </a-form-item>
         </a-form>
       </Card>
       <!-- 止损单 -->
       <Card>
-        <a-form :model="formStopMarket">
+        <a-form layout="vertical" :model="formStopMarket">
           <a-form-item label="价格">
             <a-input v-model:value="formStopMarket.price" />
           </a-form-item>
           <a-form-item>
-            <a-button type="primary" @click="handleFormStopMarket">止损下单</a-button>
+            <a-popconfirm @confirm="handleFormStopMarket">
+              <template #title>
+                <p> 确定<span class="text-red-900">止损下单</span>吗? </p>
+              </template>
+              <a-button type="primary">止损下单</a-button>
+            </a-popconfirm>
           </a-form-item>
         </a-form>
       </Card>
@@ -184,9 +197,13 @@
       tradeSide: mode.value == 'Long' ? 'BUY' : 'SELL',
       quantity: Number(formMarket.quantity),
       isOpen: true,
-    }).then(() => {
-      createMessage.success('下单成功');
-    });
+    })
+      .then(() => {
+        createMessage.success('下单成功');
+      })
+      .catch((err) => {
+        createMessage.error(err.message);
+      });
   };
 
   /**
@@ -209,6 +226,11 @@
   // 限价开仓选择百分比
   const sliderLimitOpen = async (value: number) => {
     console.log(value);
+    if (formLimit.price == 0 || formLimit.price == null) {
+      createMessage.error('请输入价格');
+      formLimit.percent = 0;
+      return;
+    }
     // 获取限价开仓数量
     getQuantity({
       id: unref(id),
@@ -238,9 +260,13 @@
       quantity: Number(formLimit.quantity),
       price: Number(formLimit.price),
       isOpen: true,
-    }).then(() => {
-      createMessage.success('下单成功');
-    });
+    })
+      .then(() => {
+        createMessage.success('下单成功');
+      })
+      .catch((err) => {
+        createMessage.error(err.message);
+      });
   };
 
   /**
@@ -265,9 +291,13 @@
       tradeSide: mode.value == 'Long' ? 'SELL' : 'BUY',
       quantity: Number(formMarketClose.quantity),
       isOpen: false,
-    }).then(() => {
-      createMessage.success('下单成功');
-    });
+    })
+      .then(() => {
+        createMessage.success('下单成功');
+      })
+      .catch((err) => {
+        createMessage.error(err.message);
+      });
   };
 
   /**
@@ -323,9 +353,13 @@
       orderType: 'STOP_MARKET',
       tradeSide: mode.value == 'Long' ? 'SELL' : 'BUY',
       price: Number(formStopMarket.price),
-    }).then(() => {
-      createMessage.success('下单成功');
-    });
+    })
+      .then(() => {
+        createMessage.success('下单成功');
+      })
+      .catch((err) => {
+        createMessage.error(err.message);
+      });
   };
 
   // watch state 变化
@@ -348,3 +382,21 @@
     },
   );
 </script>
+
+<style scoped lang="less">
+  :deep(.ant-statistic-title) {
+    font-size: 1.25rem !important;
+  }
+
+  :deep(.ant-statistic-content-value) {
+    font-size: 2rem !important;
+  }
+
+  :deep(.ant-radio-button-wrapper) {
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    line-height: 48px;
+    font-size: 20px;
+  }
+</style>

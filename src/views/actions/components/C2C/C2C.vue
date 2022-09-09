@@ -5,7 +5,7 @@
         <a-select
           v-model:value="value"
           show-search
-          placeholder="下拉选择BTCUSDT或ETHUSDT或手动输入交易对"
+          placeholder="手动输入交易对"
           style="width: 400px"
           :options="options"
           @focus="handleFocus"

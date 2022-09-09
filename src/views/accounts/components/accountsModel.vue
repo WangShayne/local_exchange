@@ -3,7 +3,7 @@
     v-bind="$attrs"
     destroyOnClose
     @register="register"
-    title="新建账户"
+    :title="title"
     @ok="confirmForm"
     @cancel="cancelForm"
   >
@@ -38,15 +38,16 @@
 
   const { createMessage } = useMessage();
   const { success } = createMessage;
+  const title = ref('新建账户');
 
-  const randomLetter = (len: number) => {
-    let x = '0123456789qwertyuioplkjhgfdsazxcvbnm';
-    let tmp = '';
-    for (let i = 0; i < len; i++) {
-      tmp += x.charAt(Math.ceil(Math.random() * 100000000) % x.length);
-    }
-    return tmp;
-  };
+  // const randomLetter = (len: number) => {
+  //   let x = '0123456789qwertyuioplkjhgfdsazxcvbnm';
+  //   let tmp = '';
+  //   for (let i = 0; i < len; i++) {
+  //     tmp += x.charAt(Math.ceil(Math.random() * 100000000) % x.length);
+  //   }
+  //   return tmp;
+  // };
 
   // 表单
   const formState = reactive({
@@ -59,12 +60,13 @@
   // model模型
   const [register, { setModalProps, closeModal }] = useModalInner(async (data: any) => {
     formState.id = '';
-    formState.name = randomLetter(6);
-    formState.apiKey = randomLetter(64);
-    formState.secretKey = randomLetter(64);
+    formState.name = '';
+    formState.apiKey = '';
+    formState.secretKey = '';
     loading.value = true;
     const { updateMode } = data;
     if (updateMode) {
+      title.value = '编辑账户';
       const {
         data: { id, name, apiKey },
       } = data;
@@ -76,6 +78,7 @@
       formState.apiKey = apiKey;
       formState.secretKey = account.secret_key as string;
     } else {
+      title.value = '新建账户';
       updateACC.value = false;
     }
     loading.value = false;

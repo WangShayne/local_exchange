@@ -1,1 +1,0 @@
-import{cJ as t}from"./index.b177970f.js";const g=t({id:"change",state:()=>({symbol:"",marginType:"",leverage:1}),getters:{},actions:{setChangeConfig(e){this.symbol=e.symbol,this.marginType=e.marginType,this.leverage=e.leverage}}});export{g as u};

@@ -2,10 +2,12 @@
   <Card title="交易参数" :bordered="false" class="!mb-4">
     <a-form layout="inline" :model="formState">
       <a-form-item label="交易对">
-        <a-input v-model:value="formState.symbol" placeholder="input placeholder" />
+        <a-input v-model:value="formState.symbol" placeholder="请收入交易对" />
+      </a-form-item>
+      <a-form-item>
+        <a-button type="primary" @click="handleChangeConfig">修改交易对</a-button>
       </a-form-item>
       <a-form-item label="仓位模式">
-        <!-- <a-input v-model:value="formState.marginType" placeholder="input placeholder" /> -->
         <a-select
           ref="select"
           v-model:value="formState.marginType"
@@ -17,7 +19,7 @@
         <a-button type="primary" @click="handleChangeConfig">修改仓位模式</a-button>
       </a-form-item>
       <a-form-item label="杠杆">
-        <a-input v-model:value="formState.leverage" placeholder="input placeholder">
+        <a-input v-model:value="formState.leverage" placeholder="请输入杠杆倍数">
           <template #suffix>
             <samp>X</samp>
           </template>
@@ -64,13 +66,13 @@
   const handleChangeConfig = () => {
     setChangeConfig({
       id: accStore.id,
-      symbol: 'ETHUSDT',
+      symbol: formState.symbol,
       marginType: formState.marginType,
       leverage: formState.leverage,
     })
       .then((_) => {
-        getNowConfig();
         createMessage.success('修改成功');
+        getNowConfig();
       })
       .catch((_) => {
         createMessage.error('修改失败');
@@ -104,7 +106,7 @@
   };
 
   watch(
-    () => accStore.state,
+    () => accStore.id,
     () => {
       getNowConfig();
     },

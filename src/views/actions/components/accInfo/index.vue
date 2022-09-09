@@ -7,8 +7,10 @@
       <a-col :span="8">
         <DualSide />
       </a-col>
+      <a-col :span="10">
+        <ErrorLog v-if="failList.length" />
+      </a-col>
     </a-row>
-    <ErrorLog v-if="failList.length" />
   </Card>
 </template>
 
@@ -23,3 +25,9 @@
   const store = useAccountsStore();
   const failList = computed(() => store.state.failList || []);
 </script>
+
+<style scoped lang="less">
+  :deep(.vben-basic-form .ant-form-item:not(.ant-form-item-with-help)) {
+    margin-bottom: 0 !important;
+  }
+</style>

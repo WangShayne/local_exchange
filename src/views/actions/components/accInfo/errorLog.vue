@@ -1,9 +1,9 @@
 <template>
   <div class="scroll-wrap">
-    <ScrollContainer class="mt-4" ref="scrollRef">
-      <ul class="p-3">
+    <ScrollContainer ref="scrollRef">
+      <ul class="mb-0">
         <template v-for="item in accState.failList" :key="item.timestamp">
-          <li class="p-2" :style="{ border: '1px solid #eee' }">
+          <li :style="{ border: '1px solid #eee' }">
             {{ formatToDateTime(item.timestamp, 'DD-MM hh:mm:ss') }} : {{ item.error }}
           </li>
         </template>
@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, ref, unref, watch } from 'vue';
+  import { computed, ref, unref, watch, onMounted } from 'vue';
   import { ScrollContainer, ScrollActionType } from '/@/components/Container/index';
   import { useAccountsStore } from '/@/store/modules/accounts';
   import { formatToDateTime } from '/@/utils/dateUtil';
@@ -30,8 +30,11 @@
   const scrollBottom = () => {
     getScroll().scrollBottom();
   };
+  onMounted(() => {
+    scrollBottom();
+  });
   watch(
-    () => accState,
+    () => accState.value,
     () => {
       scrollBottom();
     },
@@ -40,7 +43,7 @@
 <style lang="less" scoped>
   .scroll-wrap {
     width: 80%;
-    height: 300px;
+    height: 72px;
     background-color: @component-background;
   }
 </style>

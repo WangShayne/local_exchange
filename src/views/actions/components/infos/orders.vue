@@ -7,7 +7,7 @@
     :loading="loading"
     :striped="striped"
     :bordered="border"
-    :pagination="{ pageSize: 10 }"
+    :pagination="false"
     :actionColumn="actionColumn"
   >
     <template #bodyCell="{ column, record }">
@@ -29,7 +29,10 @@
             {
               label: '取消',
               type: 'primary',
-              onClick: handleClick.bind(null, record),
+              popConfirm: {
+                title: '确定取消订单吗？',
+                confirm: handleClick.bind(null, record),
+              },
             },
           ]"
         />
@@ -45,6 +48,8 @@
   import { getBasicColumns } from './ordersData';
   import { cancelOrder } from '/@/api/order/order';
   import { useAccountsStore } from '/@/store/modules/accounts';
+  import { useMessage } from '/@/hooks/web/useMessage';
+  const { createMessage } = useMessage();
   const accStore = useAccountsStore();
 
   const canResize = ref(false);
@@ -78,11 +83,15 @@
       symbol: record.symbol,
       orderId: record.orderId,
     })
-      .then((res) => {
-        console.log('取消订单成功', res);
+      .then(() => {
+        createMessage.success({
+          content: '取消订单成功',
+        });
       })
-      .catch((err) => {
-        console.log('取消订单失败', err);
+      .catch(() => {
+        createMessage.error({
+          content: '取消订单失败',
+        });
       });
   }
 

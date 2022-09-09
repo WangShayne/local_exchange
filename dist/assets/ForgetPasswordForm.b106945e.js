@@ -1,1 +1,0 @@
-import"./ForgetPasswordForm.vue_vue_type_script_setup_true_lang.0207ae4d.js";import{_ as s}from"./ForgetPasswordForm.vue_vue_type_script_setup_true_lang.0207ae4d.js";import"./LoginFormTitle.vue_vue_type_script_setup_true_lang.eec3f34f.js";import"./index.b177970f.js";/* empty css               *//* empty css               */import"./index.d9850e70.js";export{s as default};

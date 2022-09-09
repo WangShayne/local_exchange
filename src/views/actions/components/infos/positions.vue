@@ -7,7 +7,7 @@
     :loading="loading"
     :striped="striped"
     :bordered="border"
-    :pagination="{ pageSize: 10 }"
+    :pagination="false"
     :actionColumn="actionColumn"
   >
     <template #bodyCell="{ column, record }">
@@ -17,7 +17,10 @@
             {
               label: '平仓',
               type: 'primary',
-              onClick: handleClick.bind(null, record),
+              popConfirm: {
+                title: '确定平仓吗？',
+                confirm: handleClick.bind(null, record),
+              },
             },
           ]"
         />
@@ -33,6 +36,8 @@
   import { getBasicColumns } from './positionsData';
   import { useAccountsStore } from '/@/store/modules/accounts';
   import { closePosition } from '/@/api/order/order';
+  import { useMessage } from '/@/hooks/web/useMessage';
+  const { createMessage } = useMessage();
   const accStore = useAccountsStore();
   const actionColumn = {
     width: 150,
@@ -53,11 +58,11 @@
       symbol: record.symbol,
       quantity: record.quantity,
     })
-      .then((res) => {
-        console.log('平仓成功', res);
+      .then(() => {
+        createMessage.success('平仓成功');
       })
-      .catch((err) => {
-        console.log('平仓失败', err);
+      .catch(() => {
+        createMessage.error('平仓失败');
       });
   }
 

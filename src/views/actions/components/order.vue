@@ -6,10 +6,10 @@
           <a-col :span="24" class="!mb-8"
             ><a-form layout="inline" :label-col="{ span: 4 }" :wrapper-col="{ span: 14 }">
               <a-form-item label="价格">
-                <a-input v-model:value="formStateLimitBuy.price" placeholder="input placeholder" />
+                <a-input v-model:value="formStateLimitBuy.price" placeholder="请输入价格" />
               </a-form-item>
               <a-form-item label="数量">
-                <a-input v-model:value="formStateLimitBuy.amount" placeholder="input placeholder" />
+                <a-input v-model:value="formStateLimitBuy.amount" placeholder="请输入数量" />
               </a-form-item>
               <a-form-item>
                 <a-button type="primary">限价买</a-button>
@@ -19,13 +19,10 @@
           <a-col :span="24">
             <a-form layout="inline" :label-col="{ span: 4 }" :wrapper-col="{ span: 14 }">
               <a-form-item label="价格">
-                <a-input v-model:value="formStateLimitSell.price" placeholder="input placeholder" />
+                <a-input v-model:value="formStateLimitSell.price" placeholder="请输入价格" />
               </a-form-item>
               <a-form-item label="数量">
-                <a-input
-                  v-model:value="formStateLimitSell.amount"
-                  placeholder="input placeholder"
-                />
+                <a-input v-model:value="formStateLimitSell.amount" placeholder="请输入数量" />
               </a-form-item>
               <a-form-item>
                 <a-button type="primary">限价卖</a-button>
@@ -40,10 +37,7 @@
           <a-col :span="24" class="!mb-8"
             ><a-form layout="inline" :label-col="{ span: 4 }" :wrapper-col="{ span: 14 }">
               <a-form-item label="数量">
-                <a-input
-                  v-model:value="formStateMarketBuy.amount"
-                  placeholder="input placeholder"
-                />
+                <a-input v-model:value="formStateMarketBuy.amount" placeholder="请输入数量" />
               </a-form-item>
               <a-form-item>
                 <a-button type="primary">市价买</a-button>
@@ -53,10 +47,7 @@
           <a-col :span="24">
             <a-form layout="inline" :label-col="{ span: 4 }" :wrapper-col="{ span: 14 }">
               <a-form-item label="数量">
-                <a-input
-                  v-model:value="formStateMarketSell.amount"
-                  placeholder="input placeholder"
-                />
+                <a-input v-model:value="formStateMarketSell.amount" placeholder="请输入数量" />
               </a-form-item>
               <a-form-item>
                 <a-button type="primary">市价卖</a-button>

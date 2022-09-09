@@ -2,7 +2,7 @@
   <a-select
     v-model:value="state.value"
     show-search
-    placeholder="input search text"
+    placeholder="请输入账号"
     style="width: 200px"
     :default-active-first-option="false"
     :show-arrow="false"

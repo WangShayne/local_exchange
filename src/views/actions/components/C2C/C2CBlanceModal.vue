@@ -15,7 +15,7 @@
           <a-select v-model:value="secondCity" :options="cities.map((city) => ({ value: city }))" />
         </a-form-item>
         <a-form-item label="杠杆">
-          <a-input placeholder="input placeholder" type="number">
+          <a-input placeholder="请输入杠杆倍数" type="number">
             <!-- 输入框没值时候显示 -->
             <template #prefix> x </template>
           </a-input>

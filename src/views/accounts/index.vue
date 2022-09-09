@@ -79,6 +79,7 @@
       dataIndex: 'action',
       // slots: { customRender: 'action' },
     },
+    pagination: false,
   });
 
   const routeTo = (record: any) => {
